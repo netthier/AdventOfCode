@@ -48,7 +48,7 @@ fn main() {
                     }
                     last = res;
 
-                    board.iter_mut().for_each(|e| *e = vec![]);
+                    board.clear()
                 }
             }
         }
