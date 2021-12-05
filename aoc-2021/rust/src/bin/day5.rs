@@ -12,7 +12,7 @@ fn main() {
         })
         .collect();
 
-    let mut field = [[0; 1000]; 1000];
+    let mut field = [[0_u8; 1000]; 1000];
 
     for line in &parsed {
         if line[0] == line[2] {
@@ -27,11 +27,11 @@ fn main() {
             let sign = if line[1] < line[3] { 1 } else { -1 };
             if line[0] < line[2] {
                 for (idx, x) in (line[0]..=line[2]).enumerate() {
-                    field[x][((line[1] as i32) + (idx as i32) * sign) as usize] += 1024;
+                    field[x][((line[1] as i32) + (idx as i32) * sign) as usize] += 8;
                 }
             } else {
                 for (idx, x) in (line[2]..=line[0]).enumerate() {
-                    field[x][((line[3] as i32) + (idx as i32) * -sign) as usize] += 1024;
+                    field[x][((line[3] as i32) + (idx as i32) * -sign) as usize] += 8;
                 }
             }
         }
@@ -41,7 +41,7 @@ fn main() {
         "Part 1: {}",
         field
             .iter()
-            .flat_map(|e| e.iter().filter(|e| **e % 1024 > 1))
+            .flat_map(|e| e.iter().filter(|e| **e % 8 > 1))
             .count()
     );
 
@@ -49,7 +49,7 @@ fn main() {
         "Part 2: {}",
         field
             .iter()
-            .flat_map(|e| e.iter().filter(|e| **e % 1024 + **e / 1024 > 1))
+            .flat_map(|e| e.iter().filter(|e| **e % 8 + **e / 8 > 1))
             .count()
     );
 }
