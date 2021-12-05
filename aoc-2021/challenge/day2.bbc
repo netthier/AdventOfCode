@@ -1,0 +1,30 @@
+file = OPENIN "../inputs/day2"
+horiz% = 0
+aim% = 0
+depth_1% = 0
+depth_2% = 0
+REPEAT
+    char$ = CHR$(BGET#file)
+    IF char$ = "f" THEN
+        PTR#file = PTR#file + 7
+        num% = VAL(CHR$(BGET#file))
+        horiz% = horiz% + num%
+        depth_2% = depth_2% + aim% * num%
+    ENDIF
+    IF char$ = "u" THEN
+        PTR#file = PTR#file + 2
+        num% = VAL(CHR$(BGET#file))
+        depth_1% = depth_1% - num%
+        aim% = aim% - num%
+    ENDIF
+    IF char$ = "d" THEN
+        PTR#file = PTR#file + 4
+        num% = VAL(CHR$(BGET#file))
+        depth_1% = depth_1% + num%
+        aim% = aim% + num%
+    ENDIF
+    PTR#file = PTR#file + 1
+UNTIL EOF#file
+PRINT "Part 1: "; horiz% * depth_1%
+PRINT "Part 2: "; horiz% * depth_2%
+WAIT 999999
