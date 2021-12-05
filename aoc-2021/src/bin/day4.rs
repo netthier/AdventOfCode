@@ -42,7 +42,7 @@ fn main() {
                         .flatten()
                         .sum::<u32>()
                         * num;
-                    
+
                     if first.is_none() {
                         first = Some(res)
                     }
