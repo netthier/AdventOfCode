@@ -1,5 +1,5 @@
 fn main() {
-    let input = include_str!("../../inputs/day4");
+    let input = include_str!("../../../inputs/day4");
     let nums: Vec<u32> = input
         .lines()
         .next()
@@ -24,13 +24,12 @@ fn main() {
 
     let mut first = None;
     let mut last = 0;
-    for num in nums.iter() {
-        for board in boards.iter_mut() {
+    for num in &nums {
+        for board in &mut boards {
             if let Some(pos) = board
                 .iter()
                 .enumerate()
-                .filter_map(|(idx, e)| e.iter().position(|e| *e == Some(*num)).map(|e| (idx, e)))
-                .next()
+                .find_map(|(idx, e)| e.iter().position(|e| *e == Some(*num)).map(|e| (idx, e)))
             {
                 board[pos.0][pos.1] = None;
                 if board[pos.0].iter().all(Option::is_none)
@@ -38,17 +37,16 @@ fn main() {
                 {
                     let res = board
                         .iter()
-                        .map(|e| e.iter().filter_map(|x| *x))
-                        .flatten()
+                        .flat_map(|e| e.iter().filter_map(|x| *x))
                         .sum::<u32>()
                         * num;
 
                     if first.is_none() {
-                        first = Some(res)
+                        first = Some(res);
                     }
                     last = res;
 
-                    board.clear()
+                    board.clear();
                 }
             }
         }

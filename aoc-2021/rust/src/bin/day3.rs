@@ -1,5 +1,5 @@
 fn main() {
-    let input = include_str!("../../inputs/day3");
+    let input = include_str!("../../../inputs/day3");
     let lines = input.lines().count();
     let bits = input.lines().next().unwrap().chars().count();
     let mask = usize::MAX ^ ((1 << bits) - 1);

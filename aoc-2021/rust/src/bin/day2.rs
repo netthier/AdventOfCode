@@ -1,5 +1,5 @@
 fn main() {
-    let input = include_str!("../../inputs/day2");
+    let input = include_str!("../../../inputs/day2");
 
     let part_one = input.lines().fold((0, 0), |acc, e| {
         let (mut horiz, mut depth) = acc;

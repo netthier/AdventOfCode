@@ -1,5 +1,5 @@
 fn main() {
-    let input = include_str!("../../inputs/day1");
+    let input = include_str!("../../../inputs/day1");
     let nums: Vec<u32> = input.lines().map(|e| e.parse::<u32>().unwrap()).collect();
 
     let part_one = nums.windows(2).filter(|e| e[1] > e[0]).count();

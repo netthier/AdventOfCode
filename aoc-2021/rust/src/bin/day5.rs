@@ -1,13 +1,12 @@
 use std::cmp::{max, min};
 
 fn main() {
-    let input = include_str!("../../inputs/day5");
+    let input = include_str!("../../../inputs/day5");
     let parsed: Vec<Vec<usize>> = input
         .lines()
         .map(|e| {
             e.split(" -> ")
-                .map(|e| e.split(","))
-                .flatten()
+                .flat_map(|e| e.split(','))
                 .map(|e| e.parse::<usize>().unwrap())
                 .collect()
         })
@@ -15,7 +14,7 @@ fn main() {
 
     let mut field = [[0; 1000]; 1000];
 
-    for line in parsed.iter() {
+    for line in &parsed {
         if line[0] == line[2] {
             for y in min(line[1], line[3])..=max(line[1], line[3]) {
                 field[line[0]][y] += 1;
@@ -42,8 +41,7 @@ fn main() {
         "Part 1: {}",
         field
             .iter()
-            .map(|e| e.iter().filter(|e| **e % 1028 > 1))
-            .flatten()
+            .flat_map(|e| e.iter().filter(|e| **e % 1028 > 1))
             .count()
     );
 
@@ -51,8 +49,7 @@ fn main() {
         "Part 2: {}",
         field
             .iter()
-            .map(|e| e.iter().filter(|e| **e % 1028 + **e / 1028 > 1))
-            .flatten()
+            .flat_map(|e| e.iter().filter(|e| **e % 1028 + **e / 1028 > 1))
             .count()
     );
 }
