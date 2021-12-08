@@ -52,15 +52,16 @@ fn main() {
             if iter_counter > 100 {
                 iter_counter = 0;
                 key.shuffle(&mut rng);
-            } else {
-                iter_counter += 1;
             }
             let mut new_key = key.clone();
             new_key.swap(rng.gen_range(0..7), rng.gen_range(0..7));
             let new_fitness = fitness(&mut sigs.iter().chain(output.iter()), &new_key);
             if new_fitness > curr_fitness {
+                iter_counter = 0;
                 key = new_key;
                 curr_fitness = new_fitness;
+            } else {
+                iter_counter += 1;
             }
         }
         sum += output
