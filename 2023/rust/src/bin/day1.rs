@@ -4,9 +4,20 @@ fn main() {
     let part_1: u32 = input
         .lines()
         .map(|e| {
-            let mut num = e.chars().find(|e| e.is_numeric()).unwrap().to_string();
-            num.push(e.chars().rev().find(|e| e.is_numeric()).unwrap());
-            num.parse::<u32>().unwrap()
+            let num = e
+                .chars()
+                .find(|e| e.is_numeric())
+                .unwrap()
+                .to_digit(10)
+                .unwrap()
+                * 10;
+            num + e
+                .chars()
+                .rev()
+                .find(|e| e.is_numeric())
+                .unwrap()
+                .to_digit(10)
+                .unwrap()
         })
         .sum();
 
